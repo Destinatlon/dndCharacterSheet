@@ -1,0 +1,544 @@
+body {
+  font-family: "Goudy Bookletter 1911", sans-serif;
+}
+
+#stats {
+  display:flex ;
+  flex-direction : column; 
+  margin-right: 20px;
+}
+#div_stat {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 80px;
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 10px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#div_stat label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#div_stat input {
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+#div_stat .stat-modifier {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+}
+
+#div_stat input[type=number] {
+  width: 40px;
+  margin-top: 47.5px;
+  margin-left: 25px;
+  border-radius: 20px;
+}
+
+#div_stat input[type=text] {
+  width: 40px;
+  margin-bottom: 30px;
+  margin-left: 32.5px;
+  font-size: 25px;
+  border:#ccc;
+}
+
+#div_stat #stat {
+  position: absolute;
+  bottom: 10px;
+  left: 22.5px;
+  width: 80px;
+  height: 30px;
+  border-radius: 50px;
+  border: 3px solid black;
+  padding: 5px;
+  text-align: center;
+}
+
+#save_throw {
+  display:flex ;
+  flex-direction : column; 
+  width: auto;
+  border: solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#save_throw  h2{
+  text-align: center;
+}
+
+#skill_throw{
+  display:flex ;
+  flex-direction : column; 
+  width: auto;
+  border: solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+#skill_throw h2{
+  text-align: center;
+}
+
+#skill_throw input{
+  width: 5ch;
+  float:right;
+}
+
+#skill_throw input[type="checkbox"]{
+  float:left;
+}
+
+#skill_throw label {
+  margin-right: 5px;
+  min-width: 20ch;
+}
+
+#character_state {
+  display: flex;
+  flex-direction: column;
+  min-width:280px;
+}
+
+#armor_initiative_speed{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  border: solid black;
+  border-radius: 10px;
+  padding: 5%;
+  flex-wrap: nowrap;
+  width:auto;
+}
+
+#armor_initiative_speed input {
+  width: 3ch;
+  height:fit-content;
+  margin-left: 4px;
+  margin-right: 5px;
+
+}
+
+#hp {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  width:auto;
+  padding: 5%;
+}
+
+#max_hp{
+  width: 7ch;
+  position: relative;
+  margin: 5% auto;
+}
+
+
+#hp textarea{
+  resize: none;
+}
+
+#dice_hp_death_save {
+  display: flex;
+  flex-direction: row;
+}
+
+#dice_hp {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5%;
+  text-align: center;
+  width: 100px;
+  margin-top: 5px;
+}
+
+#death_save{
+  border: 2px solid black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: fit-content;
+  padding: 5%;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+#success_death_save, #fail_death_save {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+}
+#success_death_save label, #fail_death_save label{
+  margin-right: auto;
+}
+
+#character_personality{
+  display: flex;
+  text-align: center;
+  margin-left: 10px;
+  padding: 5%;
+  border:solid black;
+  border-radius: 10px;
+
+  height: fit-content;
+}
+
+#character_personality textarea{
+  height: 10ch;
+}
+
+#calculator {
+  padding: 5%;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+/*weapon table*/
+#weapon_table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#weapon_table thead {
+  background-color: #333;
+  color: #fff;
+}
+
+#weapon_table th {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#weapon_table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#weapon_table td {
+  padding: 10px;
+}
+
+#weapon_table td input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+#weapon_table td input[type="checkbox"] {
+  margin: 0 10px;
+}
+
+#weapon_table td select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+#weapon_table td input[type="text"][readonly] {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Hover Effect */
+#weapon_table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+/*magic table*/
+
+#magic_circles .circle table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#magic_circles .circle table, 
+#magic_circles .circle th, 
+#magic_circles .circle td {
+  border: 1px solid black;
+}
+
+#magic_circles .circle th, 
+#magic_circles .circle td {
+  padding: 10px;
+  text-align: left;
+  position: relative;
+  width: auto !important;
+}
+
+#magic_circles .circle th {
+  background-color: #333;
+  color: white;
+}
+
+#magic_circles .circle .table-name {
+  text-align: center;
+  font-weight: bold;
+  background-color: #f0f0f0;
+}
+
+#magic_circles .circle .add-spell-btn {
+  margin-top: 10px;
+  width: 100%; /* Make button take full width of the div */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+
+
+/* Flexbox layout for circles */
+#magic_circles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Gap between the items */
+}
+
+.circle {
+  flex: 1 1 calc(33.333% - 40px); /* Flexible basis with margin consideration */
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.circle input[type="text"]{
+  width: auto;
+}
+
+.circle textarea {
+  min-width: 30ch;
+  overflow: hidden;
+  resize: none;
+  transition: height 1s ease-in;
+}
+
+.circle textarea:focus {
+  outline: none;
+}
+
+
+#loot_and_other{
+  display: flex;
+  flex-direction: column;
+  border:solid black;
+  border-radius: 10px;
+  text-align: center;
+  width:fit-content;
+  margin-left: 10px;
+}
+#possessions_and_languages, #character_abilities {
+  display: inherit;
+  flex-direction: column;
+  height: 33%;
+  padding: 10px;
+}
+
+#character_loot{
+  display: inherit;
+  flex-direction: column;
+  width: auto;
+  padding: 10px;
+  align-items: center;
+
+
+}
+#possessions_and_languages textarea, #character_abilities textarea, #character_loot textarea{
+  width: 100%;
+}
+
+.loot_area{
+  display: flex;
+  width: auto;
+  height: 75%;
+}
+
+#money{
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+
+
+.money_loot{
+  display: flex;
+
+}
+.money_row {
+  display: flex;
+  align-items: center;
+  float:right;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.money_row input{
+  width: 10ch;
+}
+.money_row label{
+  width: 20%;
+}
+
+.fail-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+}
+
+.fail-checkbox:checked {
+  background-color: red;
+}
+
+.fail-checkbox:checked::before {
+  content: '✘';
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  text-align: center;
+}
+
+.success-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+}
+
+.success-checkbox:checked {
+  background-color: green;
+}
+
+.success-checkbox:checked::before {
+  content: '✔';
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  text-align: center;
+}
+
+.inputRollClass{
+  cursor: url("C:\\Users\\ggwpl\\OneDrive\\Рабочий стол\\Character_list\\dragon longsword new design.cur"),default !important;
+  display: inline-block;
+  background-color :rgba(182, 131, 235, 0.1);
+  transition: transform 0.1s ease; 
+}
+
+/* Define the tap animation on active state */
+.inputRollClass:active {
+  transform: scale(0.95);
+}
+
+/* #dice-container {
+  perspective: 1000px;
+}
+
+#dice {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform 1s ease-in-out;
+  left:50%;
+}
+
+.face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.face-1 { transform: rotateY(0deg) translateZ(50px); }
+.face-2 { transform: rotateY(90deg) translateZ(50px); }
+.face-3 { transform: rotateY(180deg) translateZ(50px); }
+.face-4 { transform: rotateY(-90deg) translateZ(50px); }
+.face-5 { transform: rotateX(90deg) translateZ(50px); }
+.face-6 { transform: rotateX(-90deg) translateZ(50px); } */
+
+#dice_story {
+  width: auto;
+  height: 100%;
+  margin: 5px;
+  resize: none;
+  border-radius: 5px;
+  border: 4px solid black;
+}
+
+

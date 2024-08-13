@@ -1,0 +1,366 @@
+<html>
+<title>
+	Створи свого персонажа
+</title>
+<link rel="stylesheet" href="mystyle.css">
+<body>
+	<div id = "main_info">
+		<form onsubmit="save(event)">
+			<label for="name">Ім'я</label>
+			<input type="text" id="name"  name = "name" placeholder="">
+			<label for="character_class">Клас</label>
+			<input type="text" id="character_class" name = "character_class" placeholder="">
+			<label for="lvl">Рівень класу</label>
+			<select name="lvl" id="lvl" name = "lvl" onchange="bonusChange()" value = "1">
+			</select>
+			<label for="background">Походження:</label>
+			<input type="text" id="background" name = "background" placeholder="">
+			<label for="race">Раса:</label>
+			<input type="text" id="race" name = "race" placeholder="">
+			<label for="ideology">Світогляд:</label>
+			<select type="text" name = "ideology" id="ideology">
+				<option value="chaotic-evil">Хаотично-злий</option>
+				<option value="chaotic-neutral">Хаотично-нейтральний</option>
+				<option value="chaotic-good">Хаотично-добрий</option>
+				<option value="neutral">Нейтральний</option>
+				<option value="neutral-evil">Нейтрально-злий</option>
+				<option value="neutral-good">Нейтрольно-добрий</option>
+				<option value="law">Законний</option>
+				<option value="law-good">Законно-добрий</option>
+				<option value="law-evil">Законно-злий</option>
+			</select>
+			<label for="exp">Досвід:</label>
+			<input type="number" id="exp" name = "exp" placeholder="">
+			<label for="skill_bonus">Бонус майстерності:</label>
+			<input readonly type="text" id="skill_bonus" value="+2" >
+		</form>
+	
+	</div>
+	<div name="stats_save_abilities" style="display: flex;">
+		<div id="stats">
+			<div name="div_stat" id="div_stat">
+				<label for="power">Сила</label>
+				<input type="number" name="power" id="power" min="1" onchange="createModifier(this)">
+			</div>
+			<div name="div_stat" id="div_stat">
+				<label for="agility">Спритність</label>
+				<input type="number" name="agility" id="agility" min="1" onchange="createModifier(this)">
+			</div>
+			<div name="div_stat" id="div_stat">
+				<label for="vigor">Витривалість</label>
+				<input type="number" name="vigor" id="vigor" min="1" onchange="createModifier(this)">
+			</div>
+			<div name="div_stat" id="div_stat">
+				<label for="intelligence">Інтелект</label>
+				<input type="number" name="intelligence" id="intelligence" min="1" onchange="createModifier(this)">
+			</div>
+			<div name="div_stat" id="div_stat">
+				<label for="wisdom">Мудрість</label>
+				<input type="number" name="wisdom" id="wisdom" min="1" onchange="createModifier(this)">
+			</div>
+			<div name="div_stat" id="div_stat">
+				<label for="charisma">Харизма</label>
+				<input type="number" name="charisma" id="charisma" min="1" onchange="createModifier(this)">
+			</div>
+		</div>
+		<div id="save_abilities">
+			<div id="save_throw">
+				<h2>Спаскидки</h2>
+				<div name="save_stat" id="save_stat">
+					<input type="checkbox" id="power_check" name="power_check" onchange="setSaveThrows(this)">
+					<label for="power_save">Сила</label>
+					<input name="power_save" id="power_save" style="width: 40px;float:right;">
+				</div>
+				<div name="save_stat" id="save_stat">
+					<input type="checkbox" id="agility_check" name="agility_check" onchange="setSaveThrows(this)">
+					<label for="agility_save">Спритність</label>
+					<input name="agility_save" id="agility_save" style="width: 40px;float:right;">
+				</div>
+				<div name="save_stat" id="save_stat">
+					<input type="checkbox" id="vigor_check" name="vigor_check" onchange="setSaveThrows(this)">
+					<label for="vigor_save">Витривалість</label>
+					<input name="vigor_save" id="vigor_save" style="width: 40px;float:right;">
+				</div>
+				<div name="save_stat" id="save_stat">
+					<input type="checkbox" id="intelligence_check" name="intelligence_check" onchange="setSaveThrows(this)">
+					<label for="intelligence_save">Інтелект</label>
+					<input name="intelligence_save" id="intelligence_save" style="width: 40px;float:right;">
+				</div>
+				<div name="save_stat" id="save_stat">
+					<input type="checkbox" id="wisdom_check" name="wisdom_check" onchange="setSaveThrows(this)">
+					<label for="wisdom_save">Мудрість</label>
+					<input name="wisdom_save" id="wisdom_save" style="width: 40px; float:right;">
+				</div>
+				<div name="save_stat" id="save_stat">
+					<input type="checkbox" id="charisma_check" name="charisma_check" onchange="setSaveThrows(this)">
+					<label for="charisma_save">Харизма</label>
+					<input name="charisma_save" id="charisma_save" style="width: 40px;float:right;">
+				</div>
+			</div>
+			<div id="skill_throw">
+				<h2>Навички</h2>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="agility_acrobatics_check" name="agility_acrobatics_check" onchange="setAbilities(this)">
+					<label for="agility_acrobatics">Акробатика</label>
+					<input name="agility_acrobatics" id="agility_acrobatics" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="intelligence_analysis_check" name="intelligence_analysis_check">
+					<label for="intelligence_analysis">Аналіз</label>
+					<input name="intelligence_analysis" id="intelligence_analysis" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="power_athletics_check" name="power_athletics_check">
+					<label for="power_athletics">Атлетика</label>
+					<input name="power_athletics" id="power_athletics" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="wisdom_perception_check" name="wisdom_perception_check">
+					<label for="wisdom_perception">Уважність</label>
+					<input name="wisdom_perception" id="wisdom_perception">
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="wisdom_survival_check" name="wisdom_survival_check">
+					<label for="wisdom_survival">Виживання</label>
+					<input name="wisdom_survival" id="wisdom_survival">
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="charisma_performance_check" name="charisma_performance_check">
+					<label for="charisma_performance">Виступ</label>
+					<input name="charisma_performance" id="charisma_performance">
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="charisma_intimidation_check" name="charisma_intimidation_check">
+					<label for="charisma_intimidation">Залякування</label>
+					<input name="charisma_intimidation" id="charisma_intimidation">
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="intelligence_history_check" name="intelligence_history_check">
+					<label for="intelligence_history">Історія</label>
+					<input name="intelligence_history" id="intelligence_history">
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="agility_sleightHand_check" name="agility_sleightHand_check">
+					<label for="agility_sleightHand">Вправність рук</label>
+					<input name="agility_sleightHand" id="agility_sleightHand" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="intelligence_arcana_check" name="intelligence_arcana_check" >
+					<label for="intelligence_arcana">Магія</label>
+					<input name="intelligence_arcana" id="intelligence_arcana" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="wisdom_medicine_check" name="wisdom_medicine_check">
+					<label for="wisdom_medicine">Медицина</label>
+					<input name="wisdom_medicine" id="wisdom_medicine" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="charisma_deception_check" name="charisma_deception_check">
+					<label for="charisma_deception">Оман</label>
+					<input name="charisma_deception" id="charisma_deception" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="intelligence_nature_check" name="intelligence_nature_check">
+					<label for="intelligence_nature">Природа</label>
+					<input name="intelligence_nature" id="intelligence_nature" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="wisdom_insight_check" name="wisdom_insight_check">
+					<label for="wisdom_insight">Проникливість</label>
+					<input name="wisdom_insight" id="wisdom_insight" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="intelligence_religion_check" name="intelligence_religion_check">
+					<label for="intelligence_religion">Релігія</label>
+					<input name="intelligence_religion" id="intelligence_religion" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="agility_stealth_check" name="agility_stealth_check">
+					<label for="agility_stealth">Непомітність</label>
+					<input name="agility_stealth" id="agility_stealth" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="charisma_persuasion_check" name="charisma_persuasion_check">
+					<label for="charisma_persuasion">Переконання</label>
+					<input name="charisma_persuasion" id="charisma_persuasion" >
+				</div>
+				<div name="skill_stat" id="skill_stat">
+					<input type="checkbox" id="wisdom_animalHandling_check" name="wisdom_animalHandling_check">
+					<label for="wisdom_animalHandling">Догляд за тваринами</label>
+					<input name="wisdom_animalHandling" id="wisdom_animalHandling" >
+				</div>
+			</div>	
+		</div>
+		<div id="character_state">
+			<div id="armor_initiative_speed">
+				<label for="armor">КД</label>
+				<input name="armor" id="armor">
+				<label for="initiative">Ініціатива</label>
+				<input name="initiative" id="initiative">
+				<label for="speed">Швидкість</label>
+				<input name="speed" id="speed" value="30">
+			</div>
+			<div id="hp">
+				<label for="max_hp">Максимум здоров'я</label>
+				<input type="number" name="max_hp" id="max_hp">
+				<label for="current_hp">Наявне здоров'я</label>
+				<textarea name="current_hp" id="current_hp"></textarea>
+				<label for="temporary_hp">Тимчасове здоров'я</label>
+				<textarea name="temporary_hp" id="temporary_hp"></textarea>
+			</div>
+			<div id="dice_hp_death_save">
+				<div id="dice_hp">
+					<label for="count_dice_hp">Усього</label>
+					<input type="number" name="count_dice_hp" id="count_dice_hp" max="20" min="1">
+					<label for="dice_hp_size">Розмір дайсу здоров'я</label>
+					<select  name="dice_hp_size" id="dice_hp_size">
+						<option value="6">1d6</option>
+						<option value="8">1d8</option>
+						<option value="10">1d10</option>
+						<option value="12">1d12</option>
+					</select>
+				</div>
+				<div id="death_save">
+					<div id = "success_death_save">
+						<label for="success">Успіх</label>
+						<input type="checkbox" name="success[]" class="success-checkbox" onchange="deathCheck()">
+						<input type="checkbox" name="success[]" class="success-checkbox" onchange="deathCheck()">
+						<input type="checkbox" name="success[]" class="success-checkbox" onchange="deathCheck()">
+					</div>
+					<div id = "fail_death_save">
+						<label for="fail">Невдача</label>
+						<input type="checkbox" name="fail[]" class="fail-checkbox" onchange="deathCheck()">
+						<input type="checkbox" name="fail[]" class="fail-checkbox" onchange="deathCheck()">
+						<input type="checkbox" name="fail[]" class="fail-checkbox" onchange="deathCheck()">
+					</div>
+				</div>
+			</div>
+			<!-- <div id="dice-container">
+				<div id="dice">
+					<div class="face face-1">1</div>
+					<div class="face face-2">2</div>
+					<div class="face face-3">3</div>
+					<div class="face face-4">4</div>
+					<div class="face face-5">5</div>
+					<div class="face face-6">6</div>
+				</div>
+			</div> -->
+			<textarea id="dice_story" readonly></textarea>
+		</div>
+		<div id = "ch_persona_calc" style="display: flex;flex-direction: column;">
+			<div id="character_personality" style="display: flex;flex-direction: column;">
+				<label for="personality_feats">Риси характеру</label>
+				<textarea name="personality_feats" id="personality_feats"></textarea>
+				<label for="ideal">Ідеали</label>
+				<textarea name="ideal" id="ideal"></textarea>
+				<label for="connection">Прив'язаність</label>
+				<textarea name="connection" id="connection"></textarea>
+				<label for="weakness">Слабість</label>
+				<textarea name="weakness" id="weakness"></textarea>
+				
+			</div>
+			<div id = "calculator">
+				<button value = "1d4" onclick="dmgRoll(this.value)">1d4</button>
+				<button value = "1d6" onclick="dmgRoll(this.value)">1d6</button>
+				<button value = "1d8" onclick="dmgRoll(this.value)">1d8</button>
+				<button value = "1d10" onclick="dmgRoll(this.value)">1d10</button>
+				<button value = "1d12" onclick="dmgRoll(this.value)">1d12</button>
+				<button value = "1d20" onclick="dmgRoll(this.value)">1d20</button>
+				<button onclick = "addDie(this)">+</button>
+				<button onclick = "removeDie(this)">-</button>
+
+			</div>
+		</div>
+		<div id = "loot_and_other" >
+			<div id="possessions_and_languages">
+				<label for="other_possessions_and_languages">Інші володіння та мови</label>
+				<textarea name="other_possessions_and_languages" id="other_possessions_and_languages" class="loot_area"></textarea>
+			</div>
+			<div id="character_abilities">
+				<label for="character_skills_abilities">Вміння та особливості</label>
+				<textarea name="character_skills_abilities" id="character_skills_abilities" class="loot_area"></textarea>
+			</div>
+			<div class="money_loot">
+				<div id="character_loot">
+					<label for="loot">Спорядження</label>
+					<textarea name="loot" id="loot" class="loot_area"></textarea>
+				</div>
+				<div id="money">
+					<div class="money_row">
+						<label for="bronze">ММ</label>
+						<input type="number" id="bronze" name = "bronze">
+					</div>
+					<div class="money_row">
+						<label for="silver">СМ</label>
+						<input type="number" id="silver" name = "silver">
+					</div>
+					<div class="money_row">
+						<label for="gold">ЗМ</label>
+						<input type="number" id="gold" name = "gold">
+					</div>
+					<div class="money_row">
+						<label for="electrum">ЕМ</label>
+						<input type="number" id="electrum" name = "electrum">
+					</div>
+					<div class="money_row">
+						<label for="platina">ПМ</label>
+						<input type="number" id="platina" name = "platina">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="tab">
+		<button class="tablinks" onclick="openWeaponMagic(event, 'weapon')">Зброя</button>
+		<button class="tablinks" onclick="openWeaponMagic(event, 'magic')">Заклинання</button>
+	  </div>
+	
+	
+	<div id = "weapon" class="tabcontent">
+		<table id="weapon_table"> 
+			<thead> 
+			  <tr> 
+				<th>Назва зброї</th>
+				<th>Вміння</th>
+				<th>Скейл</th> 
+				<th>Бонус атаки</th> 
+				<th>Шкода</th> 
+			  </tr> 
+			</thead> 
+			<tbody id="weapon_table_body" name ="weapon_table_body"> 
+			  <!-- Data will be inserted here --> 
+			</tbody> 
+		  </table> 
+		  <button id="add_weapon" onclick="addWeapon()">Додай зброю або заклинання</button>
+	</div>
+	<div id = "magic" class="tabcontent">
+		<div id = "magic_main">
+			<label for="magic_stat">Характеристика</label>
+			<select id="magic_stat" type='text' onload="magicAttackChange(this)" onchange="magicAttackChange(this)">
+				<option value="intelligence">Інтелект</option>
+				<option value="wisdom">Мудрість</option>
+				<option value="charisma">Харизма</option>
+			</select>
+			<label for = "attack_magic_bonus" >Бонус атаки заклинанням</label>
+			<input id ="attack_magic_bonus">
+			<label for = "save_throw_magic">Спаскидок</label>
+			<input id = "save_throw_magic">
+		</div>
+		<div id="magic_circles">
+			
+		</div>
+	</div>
+
+	<button onclick="save_character()">Зберегти</button>
+	<input type="file" id = "file">
+	<input type="checkbox" id = "roll_mode" onchange="diceMode(this)">Режим кубів</input>
+
+	
+</body>
+
+</html>
+
+<script src="myscripts.js">
+	
+</script>
