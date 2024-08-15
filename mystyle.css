@@ -488,7 +488,7 @@ body {
 }
 
 .inputRollClass{
-  cursor: url("C:\\Users\\ggwpl\\OneDrive\\Рабочий стол\\Character_list\\dragon longsword new design.cur"),default !important;
+  cursor: url('https://github.com/Destinatlon/dndCharacterSheet.github.io/blob/main/dragon%20longsword%20new%20design.cur'),default !important;
   display: inline-block;
   background-color :rgba(182, 131, 235, 0.1);
   transition: transform 0.1s ease; 
