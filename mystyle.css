@@ -363,6 +363,7 @@ body {
   min-width: 30ch;
   overflow: hidden;
   resize: none;
+  height: 20px;
   transition: height 1s ease-in;
 }
 

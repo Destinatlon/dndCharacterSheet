@@ -296,13 +296,13 @@ function createMagicCircles(){
         function autoResize() {
             this.style.height = '20px'; // Reset the height so it can shrink if needed
             const newHeight = this.scrollHeight + 'px';
-            this.style.transition = 'height 1s ease-in';
+            this.style.transition = 'height 0.3s ease-in';
             this.style.height = newHeight;
           }
           
         function resetSize() {
             this.style.height = '20px';
-            this.style.transition = 'height 1s ease-in';
+            this.style.transition = 'height 0.3s ease-in';
         }
         spellInfoInput.addEventListener('input', autoResize); // Resize on input
         spellInfoInput.addEventListener('focus', autoResize);
@@ -612,8 +612,10 @@ function dmgRoll(str){
         }
       }
       result+=` = ${total}`
-      document.getElementById("dice_story").value +=(`(${str})` + 'Ваш кидок ' + result + '\n'); 
-      return alert(result);
+      let resultStr = `(${str})` + 'Ваш кидок ' + result + '\n';
+      let story = document.getElementById("dice_story").value;
+      document.getElementById("dice_story").value = story.padStart(story.length + resultStr.length, resultStr);  
+      return result;
 }
 
 const handle_roll = function(event){roll20(this.value)};
@@ -637,8 +639,10 @@ function diceMode(input){
 
 function roll20(bonus) {
     let roll = (Math.floor(Math.random() * 20) + 1);
-    document.getElementById("dice_story").value +=("Ваш кидок "+ roll + " + " + parseInt(bonus) + " = " + (roll + parseInt(bonus))+'\n'); 
-    alert("Ваш кидок "+ roll + " + " + parseInt(bonus) + " = " + (roll + parseInt(bonus)));
+    let story = document.getElementById("dice_story").value;
+    let result = "(1d20 +  " + parseInt(bonus) + ")Ваш кидок "+ roll + " + " + parseInt(bonus) + " = " + (roll + parseInt(bonus))+'\n';
+    document.getElementById("dice_story").value = story.padStart(story.length + result.length, result); 
+    //alert("(1d20)Ваш кидок "+ roll + " + " + parseInt(bonus) + " = " + (roll + parseInt(bonus)));
     return roll + parseInt(bonus);
 }
 
