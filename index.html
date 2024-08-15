@@ -10,14 +10,14 @@
 			<input type="text" id="name"  name = "name" placeholder="">
 			<label for="character_class">Клас</label>
 			<input type="text" id="character_class" name = "character_class" placeholder="">
-			<label for="lvl">Рівень класу</label>
+			<label for="lvl">Рівень персонажу</label>
 			<select name="lvl" id="lvl" name = "lvl" onchange="bonusChange()" value = "1">
 			</select>
-			<label for="background">Походження:</label>
+			<label for="background">Походження</label>
 			<input type="text" id="background" name = "background" placeholder="">
-			<label for="race">Раса:</label>
+			<label for="race">Раса</label>
 			<input type="text" id="race" name = "race" placeholder="">
-			<label for="ideology">Світогляд:</label>
+			<label for="ideology">Світогляд</label>
 			<select type="text" name = "ideology" id="ideology">
 				<option value="chaotic-evil">Хаотично-злий</option>
 				<option value="chaotic-neutral">Хаотично-нейтральний</option>
@@ -29,9 +29,9 @@
 				<option value="law-good">Законно-добрий</option>
 				<option value="law-evil">Законно-злий</option>
 			</select>
-			<label for="exp">Досвід:</label>
+			<label for="exp">Досвід</label>
 			<input type="number" id="exp" name = "exp" placeholder="">
-			<label for="skill_bonus">Бонус майстерності:</label>
+			<label for="skill_bonus">Бонус майстерності</label>
 			<input readonly type="text" id="skill_bonus" value="+2" >
 		</form>
 	
@@ -245,7 +245,8 @@
 					<div class="face face-6">6</div>
 				</div>
 			</div> -->
-			<textarea id="dice_story" readonly></textarea>
+			<textarea id="dice_story" style="font-size: large;" readonly></textarea>
+			<button onclick="clearHistory()">Очистити історію</button>
 		</div>
 		<div id = "ch_persona_calc" style="display: flex;flex-direction: column;">
 			<div id="character_personality" style="display: flex;flex-direction: column;">
@@ -257,18 +258,21 @@
 				<textarea name="connection" id="connection"></textarea>
 				<label for="weakness">Слабість</label>
 				<textarea name="weakness" id="weakness"></textarea>
-				
 			</div>
 			<div id = "calculator">
 				<button value = "1d4" onclick="dmgRoll(this.value)">1d4</button>
 				<button value = "1d6" onclick="dmgRoll(this.value)">1d6</button>
 				<button value = "1d8" onclick="dmgRoll(this.value)">1d8</button>
+				<br>
 				<button value = "1d10" onclick="dmgRoll(this.value)">1d10</button>
 				<button value = "1d12" onclick="dmgRoll(this.value)">1d12</button>
 				<button value = "1d20" onclick="dmgRoll(this.value)">1d20</button>
+				<br>
 				<button onclick = "addDie(this)">+</button>
 				<button onclick = "removeDie(this)">-</button>
-
+				<br>
+				<label for="custom_input" style="margin: 2px;">Або можете самі ввести які кістки <br>та модифікатори вам потрібні</label>
+				<input id="custom_input" style="width: 50%;margin-top: 5px;">
 			</div>
 		</div>
 		<div id = "loot_and_other" >

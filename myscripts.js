@@ -23,6 +23,7 @@ function pageLoad(){
         newInput.id = `${elements[i].children[1].name}_mod`;
         newInput.classList.add("stat-modifier");
         newInput.value = Math.floor((elements[i].children[1].value - 10) / 2);
+        newInput.readOnly = true;
         const newLabel = document.createElement("label");
         newLabel.htmlFor = `${elements[i].children[1].name}_mod`;
         newLabel.innerHTML = "Модифікатор";
@@ -591,6 +592,7 @@ function dmgRoll(str){
       let match;
       let total = 0;
       let result = '';
+      let dice_array = [];
       while ((match = dicePattern.exec(str)) !== null) {
         if (match[2]) {
           const numberOfDice = parseInt(match[1] || '1', 10); // match[1] is the number of dice
@@ -598,41 +600,50 @@ function dmgRoll(str){
     
           for (let i = 0; i < numberOfDice; i++) {
             let dice = rollDie(sides);
-            if(i+1 === numberOfDice){
-                result += `${dice}`;
-            }
-            else{
-                result += `${dice} + `;
-            }
+            dice_array.push(dice);
             total += dice;
           }
         } else if (match[3]) {
           total += parseInt(match[3], 10);
-          result += " + "+parseInt(match[3], 10) // match[3] is the flat number
+          dice_array.push(parseInt(match[3], 10)) // match[3] is the flat number
         }
       }
-      result+=` = ${total}`
-      let resultStr = `(${str})` + 'Ваш кидок ' + result + '\n';
+      dice_array.forEach(value =>{
+        result += value + "+";
+      })
+      result = result.slice(0,-1);
+      result+=`=${total}`
+      let resultStr = `(${str})` + '\nВаш кидок ' + result + '\n';
       let story = document.getElementById("dice_story").value;
       document.getElementById("dice_story").value = story.padStart(story.length + resultStr.length, resultStr);  
       return result;
 }
 
-const handle_roll = function(event){roll20(this.value)};
+const handle_roll20 = function(event){roll20(this.value)};
+const handle_dmg_roll = function(event){dmgRoll(this.value)};
 
 function diceMode(input){
     const dice_inputs = document.querySelectorAll("#save_stat input:not([type='checkbox']), #skill_stat input:not([type='checkbox'])");
+    const custom_input = document.querySelector('#custom_input');
 
     if(input.checked){
+        custom_input.readOnly = true;
+        custom_input.classList.add("inputRollClass");
+        custom_input.addEventListener("click", handle_dmg_roll);
         Object.entries(dice_inputs).forEach(([input_name,input_value]) => {
             input_value.classList.add("inputRollClass");
-            input_value.addEventListener("click", handle_roll);
+            input_value.readOnly = true;
+            input_value.addEventListener("click", handle_roll20);
         })
     }
     else{
+        custom_input.readOnly = false;
+        custom_input.classList.remove("inputRollClass");
+        custom_input.removeEventListener("click", handle_dmg_roll);
         Object.entries(dice_inputs).forEach(([input_name,input_value]) => {
             input_value.classList.remove("inputRollClass");
-            input_value.removeEventListener("click", handle_roll);
+            input_value.readOnly = false;
+            input_value.removeEventListener("click", handle_roll20);
         })
     }
 }
@@ -640,7 +651,7 @@ function diceMode(input){
 function roll20(bonus) {
     let roll = (Math.floor(Math.random() * 20) + 1);
     let story = document.getElementById("dice_story").value;
-    let result = "(1d20 +  " + parseInt(bonus) + ")Ваш кидок "+ roll + " + " + parseInt(bonus) + " = " + (roll + parseInt(bonus))+'\n';
+    let result = "(1d20 + " + parseInt(bonus) + ")\nВаш кидок "+ roll + "+" + parseInt(bonus) + "=" + (roll + parseInt(bonus))+'\n';
     document.getElementById("dice_story").value = story.padStart(story.length + result.length, result); 
     //alert("(1d20)Ваш кидок "+ roll + " + " + parseInt(bonus) + " = " + (roll + parseInt(bonus)));
     return roll + parseInt(bonus);
@@ -670,6 +681,10 @@ function removeDie(){
         dieButton.value = count + 'd' + size;
         dieButton.textContent = count + 'd' + size;
     })
+}
+
+function clearHistory(){
+    document.querySelector('#dice_story').value = '';
 }
 
 pageLoad();
