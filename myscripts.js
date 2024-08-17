@@ -159,8 +159,6 @@ function addWeapon(){
       bonusAttackInput.type = 'text';
       bonusAttackInput.id = 'weapon_attack_bonus_'+tableBody.rows.length;
       bonusAttackInput.name = 'weapon_attack_bonus_'+tableBody.rows.length;
-      bonusAttackInput.classList.add("inputRollClass");
-      bonusAttackInput.style.cursor = 'url("C:\\Users\\ggwpl\\OneDrive\\Рабочий стол\\Character_list\\dragon longsword new design.cur"),default !important;';
       bonusAttackInput.value = document.getElementById(`${list_stat.get(scaleSelect.value)}_mod`).value || '0';
       bonusAttackCell.appendChild(bonusAttackInput);
 
@@ -192,8 +190,6 @@ function addWeapon(){
 
       skillCheckbox.addEventListener('change', updateBonusAttack);
       scaleSelect.addEventListener('change', updateBonusAttack);
-      damageInput.addEventListener('click', function() { dmgRoll(this.value) });
-      bonusAttackInput.addEventListener('click', function() { roll20(this.value) });
 }
 function deathCheck(){
     const success_checkboxes = document.querySelectorAll('input[name="success[]"]:checked').length;
@@ -623,24 +619,28 @@ const handle_roll20 = function(event){roll20(this.value)};
 const handle_dmg_roll = function(event){dmgRoll(this.value)};
 
 function diceMode(input){
-    const dice_inputs = document.querySelectorAll("#save_stat input:not([type='checkbox']), #skill_stat input:not([type='checkbox'])");
-    const custom_input = document.querySelector('#custom_input');
+    const d20_input = document.querySelectorAll("#save_stat input:not([type='checkbox']), #skill_stat input:not([type='checkbox']),input[name^='weapon_attack_bonus']");
+    const dmg_inputs = document.querySelectorAll('#custom_input, input[name^="weapon_dmg_"]');
 
     if(input.checked){
-        custom_input.readOnly = true;
-        custom_input.classList.add("inputRollClass");
-        custom_input.addEventListener("click", handle_dmg_roll);
-        Object.entries(dice_inputs).forEach(([input_name,input_value]) => {
+        Object.entries(dmg_inputs).forEach(([input_name,input_value]) => {
+            input_value.readOnly = true;
+            input_value.classList.add("inputRollClass");
+            input_value.addEventListener("click", handle_dmg_roll);
+        })    
+        Object.entries(d20_input).forEach(([input_name,input_value]) => {
             input_value.classList.add("inputRollClass");
             input_value.readOnly = true;
             input_value.addEventListener("click", handle_roll20);
         })
     }
     else{
-        custom_input.readOnly = false;
-        custom_input.classList.remove("inputRollClass");
-        custom_input.removeEventListener("click", handle_dmg_roll);
-        Object.entries(dice_inputs).forEach(([input_name,input_value]) => {
+        Object.entries(dmg_inputs).forEach(([input_name,input_value]) => {
+            input_value.readOnly = false;
+            input_value.classList.remove("inputRollClass");
+            input_value.removeEventListener("click", handle_dmg_roll);
+        }) 
+        Object.entries(d20_input).forEach(([input_name,input_value]) => {
             input_value.classList.remove("inputRollClass");
             input_value.readOnly = false;
             input_value.removeEventListener("click", handle_roll20);
@@ -653,7 +653,6 @@ function roll20(bonus) {
     let story = document.getElementById("dice_story").value;
     let result = "(1d20 + " + parseInt(bonus) + ")\nВаш кидок "+ roll + "+" + parseInt(bonus) + "=" + (roll + parseInt(bonus))+'\n';
     document.getElementById("dice_story").value = story.padStart(story.length + result.length, result); 
-    //alert("(1d20)Ваш кидок "+ roll + " + " + parseInt(bonus) + " = " + (roll + parseInt(bonus)));
     return roll + parseInt(bonus);
 }
 

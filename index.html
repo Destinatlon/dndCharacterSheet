@@ -4,38 +4,7 @@
 </title>
 <link rel="stylesheet" href="mystyle.css">
 <body>
-	<div id = "main_info">
-		<form onsubmit="save(event)">
-			<label for="name">Ім'я</label>
-			<input type="text" id="name"  name = "name" placeholder="">
-			<label for="character_class">Клас</label>
-			<input type="text" id="character_class" name = "character_class" placeholder="">
-			<label for="lvl">Рівень персонажу</label>
-			<select name="lvl" id="lvl" name = "lvl" onchange="bonusChange()" value = "1">
-			</select>
-			<label for="background">Походження</label>
-			<input type="text" id="background" name = "background" placeholder="">
-			<label for="race">Раса</label>
-			<input type="text" id="race" name = "race" placeholder="">
-			<label for="ideology">Світогляд</label>
-			<select type="text" name = "ideology" id="ideology">
-				<option value="chaotic-evil">Хаотично-злий</option>
-				<option value="chaotic-neutral">Хаотично-нейтральний</option>
-				<option value="chaotic-good">Хаотично-добрий</option>
-				<option value="neutral">Нейтральний</option>
-				<option value="neutral-evil">Нейтрально-злий</option>
-				<option value="neutral-good">Нейтрольно-добрий</option>
-				<option value="law">Законний</option>
-				<option value="law-good">Законно-добрий</option>
-				<option value="law-evil">Законно-злий</option>
-			</select>
-			<label for="exp">Досвід</label>
-			<input type="number" id="exp" name = "exp" placeholder="">
-			<label for="skill_bonus">Бонус майстерності</label>
-			<input readonly type="text" id="skill_bonus" value="+2" >
-		</form>
 	
-	</div>
 	<div name="stats_save_abilities" style="display: flex;">
 		<div id="stats">
 			<div name="div_stat" id="div_stat">
@@ -271,7 +240,7 @@
 				<button onclick = "addDie(this)">+</button>
 				<button onclick = "removeDie(this)">-</button>
 				<br>
-				<label for="custom_input" style="margin: 2px;">Або можете самі ввести які кістки <br>та модифікатори вам потрібні</label>
+				<label for="custom_input" style="margin: 2px;font-style: italic;">Або можете самі ввести які кістки <br>та модифікатори вам потрібні</label>
 				<input id="custom_input" style="width: 50%;margin-top: 5px;">
 			</div>
 		</div>
@@ -312,6 +281,35 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div id = "main_info" style="display: flex;flex-direction: column;">
+			<label for="name">Ім'я</label>
+			<input type="text" id="name"  name = "name" placeholder="">
+			<label for="character_class">Клас</label>
+			<input type="text" id="character_class" name = "character_class" placeholder="">
+			<label for="lvl">Рівень персонажу</label>
+			<select name="lvl" id="lvl" name = "lvl" onchange="bonusChange()" value = "1">
+			</select>
+			<label for="background">Походження</label>
+			<input type="text" id="background" name = "background" placeholder="">
+			<label for="race">Раса</label>
+			<input type="text" id="race" name = "race" placeholder="">
+			<label for="ideology">Світогляд</label>
+			<select type="text" name = "ideology" id="ideology">
+				<option value="chaotic-evil">Хаотично-злий</option>
+				<option value="chaotic-neutral">Хаотично-нейтральний</option>
+				<option value="chaotic-good">Хаотично-добрий</option>
+				<option value="neutral">Нейтральний</option>
+				<option value="neutral-evil">Нейтрально-злий</option>
+				<option value="neutral-good">Нейтрольно-добрий</option>
+				<option value="law">Законний</option>
+				<option value="law-good">Законно-добрий</option>
+				<option value="law-evil">Законно-злий</option>
+			</select>
+			<label for="exp">Досвід</label>
+			<input type="number" id="exp" name = "exp" placeholder="">
+			<label for="skill_bonus">Бонус майстерності</label>
+			<input readonly type="text" id="skill_bonus" value="+2" >
 		</div>
 	</div>
 	

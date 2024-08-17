@@ -63,6 +63,10 @@ body {
   text-align: center;
 }
 
+#save_abilities {
+  min-width: 240px;
+}
+
 #save_throw {
   display:flex ;
   flex-direction : column; 
@@ -192,10 +196,10 @@ body {
   display: flex;
   text-align: center;
   margin-left: 10px;
-  padding: 5%;
+  padding: 10px;
   border:solid black;
   border-radius: 10px;
-
+  width: fit-content;
   height: fit-content;
 }
 
@@ -204,7 +208,33 @@ body {
 }
 
 #calculator {
-  padding: 5%;
+  width: 200px; /* Set a fixed width for the calculator */
+  margin: 10px auto; /* Center the calculator on the page */
+  text-align: center;
+}
+
+#calculator button {
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin: 2px;
+  height: 50px;
+  width: 50px;
+}
+
+#calculator input {
+  padding: 10px;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+}
+
+#calculator label {
+  font-style: italic;
+  margin-bottom: 5px;
+  font-size: 12px;
 }
 
 .tab {
@@ -542,8 +572,13 @@ body {
   border: 4px solid black;
 }
 
-#calculator button{
-  margin: 2px;
-  height: 50px;
-  width: 50px;
+#main_info {
+  display: flex;
+  flex-direction: column;
+  border: 4px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  height: fit-content;
 }
