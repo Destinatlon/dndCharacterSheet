@@ -275,57 +275,65 @@ body {
 }
 
 /*weapon table*/
-#weapon_table {
+.table_style {
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#weapon_table thead {
+.table_style thead {
   background-color: #333;
   color: #fff;
 }
 
-#weapon_table th {
+.table_style th {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-#weapon_table tbody tr {
+.table_style tbody tr {
   border-bottom: 1px solid #ddd;
 }
 
-#weapon_table td {
+.table_style td {
   padding: 10px;
 }
 
-#weapon_table td input[type="text"] {
-  width: 100%;
+.table_style td input[type="text"] {
+  width: 40ch;
   padding: 5px;
   border: 1px solid #ccc;
 }
 
-#weapon_table td input[type="checkbox"] {
+.table_style td input[type="checkbox"] {
   margin: 0 10px;
 }
 
-#weapon_table td select {
+.table_style td select {
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
 }
 
-#weapon_table td input[type="text"][readonly] {
+/* Hover Effect */
+.table_style tbody tr:hover {
   background-color: #f0f0f0;
-  border-color: #ccc;
-  cursor: not-allowed;
 }
 
-/* Hover Effect */
-#weapon_table tbody tr:hover {
-  background-color: #f0f0f0;
+.table_style textarea {
+  min-width: 30ch;
+  width: 60ch;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  resize: none;
+  height: 26.89px;
+  transition: height 1s ease-in;
+}
+
+.table_style textarea:focus {
+  outline: none;
 }
 
 /*magic table*/
@@ -400,6 +408,8 @@ body {
 .circle textarea:focus {
   outline: none;
 }
+
+
 
 
 #loot_and_other{
@@ -529,7 +539,18 @@ body {
   transform: scale(0.95);
 }
 
+.inputRollClass:hover{
+  animation: blink 1s infinite;
+}
 
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
 
 #dice_story {
   width: auto;

@@ -42,34 +42,6 @@ function pageLoad(){
     createMagicCircles();
     magicAttackChange(document.getElementById("magic_stat"));
 
-    /* document.getElementById('dice').addEventListener('click', () => {//for dice
-        const dice = document.getElementById('dice');
-    
-        const rotations = {
-            'face-1': 'rotateX(0deg) rotateY(0deg)',
-            'face-2': 'rotateX(0deg) rotateY(90deg)',
-            'face-3': 'rotateX(0deg) rotateY(180deg)',
-            'face-4': 'rotateX(0deg) rotateY(-90deg)',
-            'face-5': 'rotateX(90deg) rotateY(0deg)',
-            'face-6': 'rotateX(-90deg) rotateY(0deg)'
-        };
-    
-        // Get a random face
-        const faces = Object.keys(rotations);
-        const randomFace = faces[Math.floor(Math.random() * faces.length)];
-        
-        // Add some initial random rotation for a more realistic throw
-        const initialX = Math.floor(Math.random() * 360);
-        const initialY = Math.floor(Math.random() * 360);
-        const initialZ = Math.floor(Math.random() * 360);
-        dice.style.transform = `rotateX(${initialX}deg) rotateY(${initialY}deg) rotateZ(${initialZ}deg)`;
-    
-        // Set a timeout to transition to the final rotation
-        setTimeout(() => {
-            dice.style.transform = rotations[randomFace];
-        }, 1000); // Adjust the timeout duration as needed
-    }); */
-
 }
 
 
@@ -301,9 +273,9 @@ function createMagicCircles(){
             this.style.height = '20px';
             this.style.transition = 'height 0.3s ease-in';
         }
-        spellInfoInput.addEventListener('input', autoResize); // Resize on input
+        spellInfoInput.addEventListener('input', autoResize); 
         spellInfoInput.addEventListener('focus', autoResize);
-        spellInfoInput.addEventListener('blur', resetSize); // Resize on focus
+        spellInfoInput.addEventListener('blur', resetSize); 
         
         
         spellInfoCell.appendChild(spellInfoInput);
@@ -382,6 +354,74 @@ function bonusChange(){
             }
             magicAttackChange(document.getElementById("magic_stat"));
 
+}
+
+function addItemRow() {
+    // Get the table element
+    const tableBody = document.getElementById('item_table_body');
+    const newRow = document.createElement('tr');
+    newRow.id = "item_#_" + tableBody.rows.length;
+
+    const itemCheckBoxCell = document.createElement('td');
+    const itemCheckBoxInput = document.createElement('input');
+    itemCheckBoxInput.type = 'checkbox';
+    itemCheckBoxInput.id = 'item_checkbox_'+tableBody.rows.length;
+    itemCheckBoxInput.name = 'item_checkbox_'+tableBody.rows.length;
+    itemCheckBoxCell.appendChild(itemCheckBoxInput);
+
+
+    const itemNameCell = document.createElement('td');
+    const itemNameInput = document.createElement('input');
+    itemNameInput.type = 'text';
+    itemNameInput.id = 'item_name_'+tableBody.rows.length;
+    itemNameInput.name = 'item_name_'+tableBody.rows.length;
+    itemNameCell.appendChild(itemNameInput);
+
+    const itemInfoCell = document.createElement('td');
+    const itemInfoInput = document.createElement('textarea');
+    itemInfoInput.type = 'text';
+    itemInfoInput.id = 'item_info_'+tableBody.rows.length;
+    itemInfoInput.name = 'item_info_'+tableBody.rows.length;
+    itemInfoCell.appendChild(itemInfoInput);
+
+    const deleteCell = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Прибрати';
+    deleteButton.addEventListener('click', () => {
+        tableBody.removeChild(newRow);
+    });
+    deleteCell.appendChild(deleteButton);
+
+
+    newRow.appendChild(itemCheckBoxCell);
+    newRow.appendChild(itemNameCell);
+    newRow.appendChild(itemInfoCell);
+    newRow.append(deleteCell);
+
+    tableBody.appendChild(newRow);
+    
+    function autoResize() {
+        this.style.height = '26.89px'; // Reset the height so it can shrink if needed
+        const newHeight = this.scrollHeight + 'px';
+        this.style.transition = 'height 0.3s ease-in';
+        this.style.height = newHeight;
+      }
+      
+    function resetSize() {
+        this.style.height = '26.89px';
+        this.style.transition = 'height 0.3s ease-in';
+    }
+    itemInfoInput.addEventListener('input', autoResize); 
+    itemInfoInput.addEventListener('focus', autoResize);
+    itemInfoInput.addEventListener('blur', resetSize); 
+}
+
+function deleteItemRow(button) {
+    // Get the row to be deleted
+    let row = button.parentNode.parentNode;
+
+    // Remove the row from the table
+    row.parentNode.removeChild(row);
 }
 
 function save_character(){
@@ -475,6 +515,23 @@ function save_character(){
         }
     })
 
+    const items = document.querySelectorAll('#item_table_body tr');
+    character["item"] = {};
+    items.forEach(item =>{
+        character["item"][item.id] = {};
+        item.querySelectorAll("td").forEach(itemcell => {
+            let inputElement = itemcell.querySelector("input, textarea");
+            if(inputElement === null){
+                return;
+            }
+            else if(inputElement.type === "checkbox"){
+                character["item"][item.id][inputElement.name] = inputElement.checked;
+            }
+            else{
+                character["item"][item.id][inputElement.name] = inputElement.value;
+            }
+        })
+    })
 
     const JSONToFile = (obj, filename) => {
         const blob = new Blob([JSON.stringify(obj, null, 2)], {
@@ -536,7 +593,6 @@ function loadCharacter(character){
             }
             if(elem_name == "weapon"){
                 Object.entries(value).forEach(([second_name,second_value]) => {
-                    let r = document.getElementById(second_name);
                     addWeapon();
                     Object.entries(second_value).forEach(([weapon_cell_name,weapon_cell_value]) => {
                         let cell = document.getElementById(weapon_cell_name);
@@ -546,6 +602,21 @@ function loadCharacter(character){
                         }
                         else{
                             cell.value = weapon_cell_value;
+                        }
+                    })
+                })
+            }
+            if(elem_name == "item"){
+                Object.entries(value).forEach(([second_name,second_value]) =>{
+                    addItemRow();
+                    Object.entries(second_value).forEach(([item_cell_name,item_cell_value]) => {
+                        let cell = document.getElementById(item_cell_name);
+                        if(cell.type === 'checkbox')
+                        {
+                            cell.checked = item_cell_value;
+                        }
+                        else{
+                            cell.value = item_cell_value;
                         }
                     })
                 })

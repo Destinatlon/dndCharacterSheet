@@ -322,7 +322,7 @@
 	
 	
 	<div id = "weapon" class="tabcontent">
-		<table id="weapon_table"> 
+		<table id="weapon_table" class="table_style"> 
 			<thead> 
 			  <tr> 
 				<th>Назва зброї</th>
@@ -356,7 +356,19 @@
 		</div>
 	</div>
 	<div id = "items" class = "tabcontent">
-
+		<table id="item_table" class="table_style">
+			<thead>
+				<tr>
+					<th>Налаштування</th>
+					<th>Назва</th>
+					<th>Опис</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id = "item_table_body">
+			</tbody>
+		</table>
+		<button type="button" onclick="addItemRow()">Додати предмет</button>
 	</div>
 
 	
