@@ -2,6 +2,7 @@
 <title>
 	Створи свого персонажа
 </title>
+<link rel="icon" type = "image/x-icon" href = "images/fav.png">
 <link rel="stylesheet" href="mystyle.css">
 <body>
 	
@@ -229,13 +230,13 @@
 				<textarea name="weakness" id="weakness"></textarea>
 			</div>
 			<div id = "calculator">
-				<button value = "1d4" onclick="dmgRoll(this.value)">1d4</button>
-				<button value = "1d6" onclick="dmgRoll(this.value)">1d6</button>
-				<button value = "1d8" onclick="dmgRoll(this.value)">1d8</button>
+				<button value = "1d4" onclick="dmgRoll(this.value)" class = "dragon_cursor">1d4</button>
+				<button value = "1d6" onclick="dmgRoll(this.value)" class = "dragon_cursor">1d6</button>
+				<button value = "1d8" onclick="dmgRoll(this.value)" class = "dragon_cursor">1d8</button>
 				<br>
-				<button value = "1d10" onclick="dmgRoll(this.value)">1d10</button>
-				<button value = "1d12" onclick="dmgRoll(this.value)">1d12</button>
-				<button value = "1d20" onclick="dmgRoll(this.value)">1d20</button>
+				<button value = "1d10" onclick="dmgRoll(this.value)" class = "dragon_cursor">1d10</button>
+				<button value = "1d12" onclick="dmgRoll(this.value)" class = "dragon_cursor">1d12</button>
+				<button value = "1d20" onclick="dmgRoll(this.value)" class = "dragon_cursor">1d20</button>
 				<br>
 				<button onclick = "addDie(this)">+</button>
 				<button onclick = "removeDie(this)">-</button>
@@ -301,7 +302,7 @@
 				<option value="chaotic-good">Хаотично-добрий</option>
 				<option value="neutral">Нейтральний</option>
 				<option value="neutral-evil">Нейтрально-злий</option>
-				<option value="neutral-good">Нейтрольно-добрий</option>
+				<option value="neutral-good">Нейтрально-добрий</option>
 				<option value="law">Законний</option>
 				<option value="law-good">Законно-добрий</option>
 				<option value="law-evil">Законно-злий</option>
@@ -314,9 +315,10 @@
 	</div>
 	
 	<div class="tab">
-		<button class="tablinks" onclick="openWeaponMagic(event, 'weapon')">Зброя</button>
-		<button class="tablinks" onclick="openWeaponMagic(event, 'magic')">Заклинання</button>
-	  </div>
+		<button class="tablinks" onclick="openTab(event, 'weapon')">Зброя</button>
+		<button class="tablinks" onclick="openTab(event, 'magic')">Заклинання</button>
+		<button class ="tablinks" onclick="openTab(event,'items')">Предмети</button>
+	</div>
 	
 	
 	<div id = "weapon" class="tabcontent">
@@ -353,10 +355,24 @@
 			
 		</div>
 	</div>
+	<div id = "items" class = "tabcontent">
 
-	<button onclick="save_character()">Зберегти</button>
-	<input type="file" id = "file">
-	<input type="checkbox" id = "roll_mode" onchange="diceMode(this)">Режим кубів</input>
+	</div>
+
+	
+	<div class="menu">
+		<button onclick="save_character()">Зберегти</button>
+		<input type="file" id = "file">
+		<input type="checkbox" id="roll_mode" onchange="diceMode(this)" hidden>
+		<div class="dice" onclick="toggleDiceModeCheckbox()">
+		  <div class="side one"></div>
+		  <div class="side two"></div>
+		  <div class="side three"></div>
+		  <div class="side four"></div>
+		  <div class="side five"></div>
+		  <div class="side six"></div>
+		</div>
+	  </div>
 
 	
 </body>

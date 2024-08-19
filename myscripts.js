@@ -203,7 +203,7 @@ function deathCheck(){
         alert('Я сподіваюсь в тебе є лист із запасним персонажем');
     }
 }
-function openWeaponMagic(evt, tabName) {
+function openTab(evt, tabName) {
     // Declare all variables
     let i, tabcontent, tablinks;
   
@@ -621,9 +621,11 @@ const handle_dmg_roll = function(event){dmgRoll(this.value)};
 function diceMode(input){
     const d20_input = document.querySelectorAll("#save_stat input:not([type='checkbox']), #skill_stat input:not([type='checkbox']),input[name^='weapon_attack_bonus']");
     const dmg_inputs = document.querySelectorAll('#custom_input, input[name^="weapon_dmg_"]');
+    const dice = document.querySelector('.dice');
 
     if(input.checked){
         Object.entries(dmg_inputs).forEach(([input_name,input_value]) => {
+            dice.classList.add('rotating');
             input_value.readOnly = true;
             input_value.classList.add("inputRollClass");
             input_value.addEventListener("click", handle_dmg_roll);
@@ -636,6 +638,7 @@ function diceMode(input){
     }
     else{
         Object.entries(dmg_inputs).forEach(([input_name,input_value]) => {
+            dice.classList.remove('rotating');
             input_value.readOnly = false;
             input_value.classList.remove("inputRollClass");
             input_value.removeEventListener("click", handle_dmg_roll);
@@ -647,6 +650,12 @@ function diceMode(input){
         })
     }
 }
+
+function toggleDiceModeCheckbox() {
+    const checkbox = document.getElementById('roll_mode');
+    checkbox.checked = !checkbox.checked;
+    diceMode(checkbox); // Trigger the diceMode function to apply or remove the rotation
+  }
 
 function roll20(bonus) {
     let roll = (Math.floor(Math.random() * 20) + 1);
