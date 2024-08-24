@@ -302,7 +302,7 @@ body {
 }
 
 .table_style td input[type="text"] {
-  width: 40ch;
+  width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
 }
@@ -324,7 +324,7 @@ body {
 
 .table_style textarea {
   min-width: 30ch;
-  width: 60ch;
+  width: 100%;
   border: 1px solid #ccc;
   overflow: hidden;
   resize: none;

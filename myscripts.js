@@ -333,7 +333,7 @@ function bonusChange(){
 
     const save_block = document.getElementsByName("save_stat");
     for(let i=0;i<save_block.length;i++){
-        if (skill_block[i].querySelector('input[type="checkbox"]').checked == true)
+        if (save_block[i].querySelector('input[type="checkbox"]').checked == true)
             {
                 setSaveThrows(save_block[i].querySelector('input'));
             }
