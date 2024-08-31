@@ -1,4 +1,4 @@
-body {
+blockbody {
   font-family: "Goudy Bookletter 1911", sans-serif;
 }
 
@@ -125,6 +125,7 @@ body {
   padding: 5%;
   flex-wrap: nowrap;
   width:auto;
+  justify-content: center;
 }
 
 #armor_initiative_speed input {
@@ -695,4 +696,30 @@ body {
   to {
     transform: rotateY(360deg) rotateX(30deg) rotateZ(30deg);
   }
+}
+
+
+.custom-file-upload {
+  background-color: #e6e6e6;
+  color: black;
+  padding: 8px 15px;
+  border: 2px solid #000;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 2px 2px 0 #000;
+  margin-right: 10px;
+}
+
+.custom-file-upload:hover {
+  background-color: #d4d4d4;
+  box-shadow: 1px 1px 0 #000;
+}
+
+.custom-file-upload::before {
+  content: '\1F4E5'; /* Unicode for download icon */
+  font-size: 16px;
 }

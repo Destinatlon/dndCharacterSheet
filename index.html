@@ -373,8 +373,11 @@
 
 	
 	<div class="menu">
-		<button onclick="save_character()">Зберегти</button>
-		<input type="file" id = "file">
+		<button onclick="save_character()" class="custom-file-upload">Зберегти</button>
+		<label for="file" class="custom-file-upload">
+			Завантажити персонажа
+		</label>
+		<input type="file" id="file" style="display: none;">
 		<input type="checkbox" id="roll_mode" onchange="diceMode(this)" hidden>
 		<div class="dice" onclick="toggleDiceModeCheckbox()">
 		  <div class="side one"></div>

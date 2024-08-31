@@ -544,8 +544,16 @@ function save_character(){
         a.click();
         URL.revokeObjectURL(url);
       };
+
+      let filename = prompt('how to name file?');
+
+      if(filename){
+        JSONToFile(character, filename);
+      }
+      else{
+        return;
+      }
       
-      JSONToFile(character, prompt('how to name file?'));
 }
 
 (function(){//я не знаю что тут происходит, только знаю что файл когда читается я могу с него обьект вытащить
